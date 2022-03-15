@@ -5,9 +5,11 @@ import kotlinx.coroutines.flow.flow
 
 class EventRepository {
 
-    fun fetchEvents() : Flow<List<Event>> {
+    suspend fun fetchEvents() : Flow<List<Event>> {
         return flow {
-            emit(listOf())
+            emit(listOf(
+                Event("1", title = "Title 1", price = "2.29"),
+                Event("1",title = "Title 2", price = "5.29")))
         }
     }
 }
