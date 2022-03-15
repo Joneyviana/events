@@ -5,8 +5,8 @@ data class Event(
     val title: String,
     val description: String = "",
     val image:String? = null,
-    val longitude: Int? = null,
-    val latitude: Int? = null,
+    val longitude: Float? = null,
+    val latitude: Float? = null,
     val price: String = "",
     val date: Long? = null,
     val people: List<CheckIn> = listOf()

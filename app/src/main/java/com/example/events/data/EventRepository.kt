@@ -1,15 +1,16 @@
 package com.example.events.data
 
+import com.example.events.data.network.RetrofitConfig
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 class EventRepository {
 
-    suspend fun fetchEvents() : Flow<List<Event>> {
+    fun fetchEvents(): Flow<List<Event>> {
         return flow {
-            emit(listOf(
-                Event("1", title = "Title 1", price = "2.29"),
-                Event("1",title = "Title 2", price = "5.29")))
-        }
+            RetrofitConfig.eventsApi.getEvents().body()?.let { emit(it) }
+        }.flowOn(Dispatchers.IO)
     }
 }
