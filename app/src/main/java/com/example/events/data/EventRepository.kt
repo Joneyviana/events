@@ -11,7 +11,6 @@ class EventRepository {
 
     fun fetchEvents(): Flow<RequestStatus<List<Event>>> {
         return flow {
-
             emit(RequestStatus(loading = true))
             emit(RequestStatus.checkStatus(RetrofitConfig.eventsApi.getEvents()))
 
@@ -20,9 +19,17 @@ class EventRepository {
 
     fun fetchEventDetail(eventId: String): Flow<RequestStatus<Event>> {
         return flow {
-
             emit(RequestStatus(loading = true))
             emit(RequestStatus.checkStatus(RetrofitConfig.eventsApi.getEventDetail(eventId)))
+
+        }.flowOn(Dispatchers.IO)
+    }
+
+    fun checkIn(checkIn: CheckIn) : Flow<RequestStatus<Boolean>>{
+        return flow {
+            emit(RequestStatus(loading = true))
+            val response = RetrofitConfig.eventsApi.makeCheckIn(checkIn)
+            emit(RequestStatus(success = response.isSuccessful, failed = !response.isSuccessful))
 
         }.flowOn(Dispatchers.IO)
     }

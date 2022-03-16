@@ -26,9 +26,10 @@ class EventDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.getString(EVENT_ID)?.let {
+        arguments?.getString(EVENT_ID)?.let { eventId ->
             setScreenState()
-            viewModel.fetchEventDetail(it)
+            binding?.checkinButton?.setOnClickListener { viewModel.checkIn(eventId) }
+            viewModel.fetchEventDetail(eventId)
         }
 
     }
@@ -40,6 +41,10 @@ class EventDetailFragment : Fragment() {
             it.success?.let { event ->
                 binding?.event = event
             }
+        }
+
+        viewModel.checkin.observe(viewLifecycleOwner) {
+            binding?.progressBarLoading?.visibility = it.loading.toVisibility()
         }
     }
 
