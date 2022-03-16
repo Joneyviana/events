@@ -1,9 +1,12 @@
 package com.example.events.presentation
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.events.R
+import com.example.events.constants.EventAppConstants.EVENT_ID
 import com.example.events.data.Event
 
 
@@ -26,6 +29,8 @@ class EventsAdapter(
         val binding = (holder as EventsViewHolder).binding
         binding?.event = events[position]
         binding?.executePendingBindings()
+        val bundle = Bundle().apply { putString(EVENT_ID, events[position].id) }
+        holder.itemView.setOnClickListener { it.findNavController().navigate(R.id.event_detail, bundle) }
     }
 
     override fun getItemCount() = events.size

@@ -13,4 +13,10 @@ class EventRepository {
             RetrofitConfig.eventsApi.getEvents().body()?.let { emit(it) }
         }.flowOn(Dispatchers.IO)
     }
+
+    fun fetchEventDetail(eventId: String): Flow<Event> {
+        return flow {
+            RetrofitConfig.eventsApi.getEventDetail(eventId).body()?.let { emit(it) }
+        }.flowOn(Dispatchers.IO)
+    }
 }
