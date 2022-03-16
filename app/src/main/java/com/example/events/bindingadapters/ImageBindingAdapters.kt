@@ -8,8 +8,8 @@ import java.net.URLEncoder
 
 
 @BindingAdapter("imageURL")
-fun AppCompatImageView.loadImage(url: String) {
-    if (url.isNotEmpty()) {
+fun AppCompatImageView.loadImage(url: String?) {
+    if (url?.isNotEmpty() == true) {
         Glide.with(this.context).load(url).centerCrop()
             .placeholder(R.drawable.ic_placeholder)
             .into(this)

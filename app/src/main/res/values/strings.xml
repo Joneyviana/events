@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Events</string>
+    <string name="price_event_price">price: %1$s</string>
+    <string name="checkin_label">CheckIn</string>
 </resources>

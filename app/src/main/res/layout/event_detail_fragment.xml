@@ -9,51 +9,85 @@
             type="com.example.events.data.Event" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <androidx.appcompat.widget.AppCompatImageView
-
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:imageURL="@{event.image}"
-            tools:ignore="MissingConstraints" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{event.title}"
-            tools:ignore="MissingConstraints" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/large_event_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:adjustViewBounds="true"
+                app:imageURL="@{event.image}"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{event.description}"
-            tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/event_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:text="@{event.title}"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/event_date_text" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/event_description_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:text="@{event.description}"
+                android:ellipsize="end"
+                android:maxEms="19"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/event_title_text" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{event.price}"
-            tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/event_date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:timestamp="@{event.date}"
+                app:patternDate="@{`yyyy-MM-dd HH:mm`}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/large_event_image"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/checkin_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text= "Checkin"
-            tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/event_price_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/price_event_price(event.price)}"
+                android:layout_margin="@dimen/default_margin"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/event_description_text"
+                app:layout_constraintBottom_toBottomOf="@+id/checkin_button" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/checkin_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/checkin_label"
+                android:layout_margin="@dimen/default_margin"
+                app:layout_constraintEnd_toEndOf="@+id/event_description_text"
+                app:layout_constraintTop_toBottomOf="@+id/event_description_text"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
