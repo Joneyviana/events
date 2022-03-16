@@ -25,7 +25,18 @@
                 android:layout_margin="@dimen/default_margin"
                 android:adjustViewBounds="true"
                 app:imageURL="@{event.image}"
+                app:visibilityDependOnNullable="@{event}"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/event_date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:timestamp="@{event.date}"
+                app:patternDate="@{`yyyy-MM-dd HH:mm`}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/large_event_image"/>
 
             <TextView
                 android:id="@+id/event_title_text"
@@ -51,20 +62,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/event_title_text" />
 
+
+            <ProgressBar
+                android:id="@+id/progress_bar_loading"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/event_date_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:timestamp="@{event.date}"
-                app:patternDate="@{`yyyy-MM-dd HH:mm`}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/large_event_image"/>
 
             <TextView
                 android:id="@+id/event_price_text"
@@ -74,6 +87,7 @@
                 android:layout_margin="@dimen/default_margin"
                 android:textSize="@dimen/title_text_size"
                 android:textStyle="bold"
+                app:visibilityDependOnNullable="@{event}"
                 app:layout_constraintStart_toStartOf="@+id/event_description_text"
                 app:layout_constraintBottom_toBottomOf="@+id/checkin_button" />
 
@@ -86,7 +100,7 @@
                 android:layout_margin="@dimen/default_margin"
                 app:layout_constraintEnd_toEndOf="@+id/event_description_text"
                 app:layout_constraintTop_toBottomOf="@+id/event_description_text"
-                tools:ignore="MissingConstraints" />
+                app:visibilityDependOnNullable="@{event}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

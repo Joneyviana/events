@@ -1,23 +1,16 @@
 package com.example.events.presentation
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.events.R
 import com.example.events.constants.EventAppConstants.EVENT_ID
 import com.example.events.databinding.EventDetailFragmentBinding
-import com.example.events.databinding.EventsFragmentBinding
+import com.example.events.extensions.toVisibility
 
 class EventDetailFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = EventDetailFragment()
-    }
 
     private var binding: EventDetailFragmentBinding? = null
     private val viewModel by viewModels<EventDetailViewModel>()
@@ -42,7 +35,11 @@ class EventDetailFragment : Fragment() {
 
     private fun setScreenState() {
         viewModel.eventDetail.observe(viewLifecycleOwner) {
-            binding?.event = it
+            binding?.progressBarLoading?.visibility = it.loading.toVisibility()
+
+            it.success?.let { event ->
+                binding?.event = event
+            }
         }
     }
 

@@ -6,13 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.events.data.Event
 import com.example.events.data.EventRepository
+import com.example.events.data.network.RequestStatus
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class EventViewModel : ViewModel() {
     private val eventRepository = EventRepository()
-    private val _events: MutableLiveData<List<Event>> = MutableLiveData()
-    val events: LiveData<List<Event>> = _events
+    private val _events: MutableLiveData<RequestStatus<List<Event>>> = MutableLiveData()
+    val events: LiveData<RequestStatus<List<Event>>>  = _events
 
     init {
         fetchEvents()

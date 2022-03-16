@@ -9,13 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.events.databinding.EventsFragmentBinding
+import com.example.events.extensions.toVisibility
 
 
 class EventsFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = EventsFragment()
-    }
 
     private var binding: EventsFragmentBinding? = null
     private val viewModel by viewModels<EventViewModel>()
@@ -37,11 +34,15 @@ class EventsFragment : Fragment() {
     private fun setScreenState() {
         val linearLayoutManager = LinearLayoutManager(activity)
         viewModel.events.observe(viewLifecycleOwner) {
-            val eventsAdapter = EventsAdapter(it)
-            binding?.recyclerViewEvents?.apply {
-                adapter = eventsAdapter
-                layoutManager = linearLayoutManager
-                addItemDecoration(DividerItemDecoration(context, linearLayoutManager.orientation))
+            binding?.progressBarLoading?.visibility = it.loading.toVisibility()
+
+            it.success?.let { event ->
+                val eventsAdapter = EventsAdapter(event)
+                binding?.recyclerViewEvents?.apply {
+                    adapter = eventsAdapter
+                    layoutManager = linearLayoutManager
+                    addItemDecoration(DividerItemDecoration(context, linearLayoutManager.orientation))
+                }
             }
         }
     }

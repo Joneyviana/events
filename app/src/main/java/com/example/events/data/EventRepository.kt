@@ -1,5 +1,6 @@
 package com.example.events.data
 
+import com.example.events.data.network.RequestStatus
 import com.example.events.data.network.RetrofitConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -8,15 +9,21 @@ import kotlinx.coroutines.flow.flowOn
 
 class EventRepository {
 
-    fun fetchEvents(): Flow<List<Event>> {
+    fun fetchEvents(): Flow<RequestStatus<List<Event>>> {
         return flow {
-            RetrofitConfig.eventsApi.getEvents().body()?.let { emit(it) }
+
+            emit(RequestStatus(loading = true))
+            emit(RequestStatus.checkStatus(RetrofitConfig.eventsApi.getEvents()))
+
         }.flowOn(Dispatchers.IO)
     }
 
-    fun fetchEventDetail(eventId: String): Flow<Event> {
+    fun fetchEventDetail(eventId: String): Flow<RequestStatus<Event>> {
         return flow {
-            RetrofitConfig.eventsApi.getEventDetail(eventId).body()?.let { emit(it) }
+
+            emit(RequestStatus(loading = true))
+            emit(RequestStatus.checkStatus(RetrofitConfig.eventsApi.getEventDetail(eventId)))
+
         }.flowOn(Dispatchers.IO)
     }
 }
