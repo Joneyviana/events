@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.events.R
 import com.example.events.constants.EventAppConstants.EVENT_ID
 import com.example.events.databinding.EventDetailFragmentBinding
 import com.example.events.extensions.toVisibility
+import com.example.events.presentation.checkin.CheckInDialogs
 
 class EventDetailFragment : Fragment() {
 
@@ -22,7 +21,7 @@ class EventDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = EventDetailFragmentBinding.inflate(inflater, container, false);
+        binding = EventDetailFragmentBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
@@ -52,8 +51,17 @@ class EventDetailFragment : Fragment() {
             }
         }
 
-        viewModel.checkIn.observe(viewLifecycleOwner) {
-            binding?.progressBarLoading?.visibility = it.loading.toVisibility()
+        viewModel.checkIn.observe(viewLifecycleOwner) { response ->
+            binding?.progressBarLoading?.visibility = response.loading.toVisibility()
+            activity?.let { context ->
+                response.success?.let {
+                    CheckInDialogs().showSuccessDialog(context)
+                } ?: run {
+                    if (response.failed) {
+                        CheckInDialogs().showFailedDialog(context)
+                    }
+                }
+            }
         }
     }
 

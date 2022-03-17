@@ -6,12 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.events.R
-import com.example.events.constants.EventAppConstants
-import com.example.events.constants.EventAppConstants.IS_FROM_EVENT_LIST
 import com.example.events.databinding.EventsFragmentBinding
 import com.example.events.extensions.toVisibility
 
@@ -25,7 +21,7 @@ class EventsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = EventsFragmentBinding.inflate(inflater, container, false);
+        binding = EventsFragmentBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
