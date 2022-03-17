@@ -10,12 +10,14 @@ import com.example.events.data.CheckIn
 import com.example.events.data.Event
 import com.example.events.data.EventRepository
 import com.example.events.data.network.RequestStatus
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
+import javax.inject.Inject
 
-class EventDetailViewModel : ViewModel() {
-    private val eventRepository = EventRepository()
+@HiltViewModel
+class EventDetailViewModel @Inject constructor(private val eventRepository: EventRepository) : ViewModel() {
 
     private val _eventDetail: MutableLiveData<RequestStatus<Event>> = MutableLiveData()
     val eventDetail: LiveData<RequestStatus<Event>> = _eventDetail

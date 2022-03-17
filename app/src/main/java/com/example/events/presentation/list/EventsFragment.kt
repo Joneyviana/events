@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.events.databinding.EventsFragmentBinding
 import com.example.events.extensions.toVisibility
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class EventsFragment : Fragment() {
 
     private var binding: EventsFragmentBinding? = null

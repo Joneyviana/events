@@ -1,5 +1,6 @@
 package com.example.events.presentation.detail
 
+import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,9 @@ import com.example.events.constants.EventAppConstants.EVENT_ID
 import com.example.events.databinding.EventDetailFragmentBinding
 import com.example.events.extensions.toVisibility
 import com.example.events.presentation.checkin.CheckInDialogs
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EventDetailFragment : Fragment() {
 
     private var eventId: String? = null
