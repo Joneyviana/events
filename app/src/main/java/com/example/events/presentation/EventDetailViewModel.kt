@@ -12,6 +12,7 @@ import com.example.events.data.EventRepository
 import com.example.events.data.network.RequestStatus
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 
 class EventDetailViewModel : ViewModel() {
     private val eventRepository = EventRepository()
@@ -19,8 +20,8 @@ class EventDetailViewModel : ViewModel() {
     private val _eventDetail: MutableLiveData<RequestStatus<Event>> = MutableLiveData()
     val eventDetail: LiveData<RequestStatus<Event>> = _eventDetail
 
-    private val _checkin: MutableLiveData<RequestStatus<Boolean>> = MutableLiveData()
-    val checkin: LiveData<RequestStatus<Boolean>> = _checkin
+    private val _checkIn: MutableLiveData<RequestStatus<ResponseBody>> = MutableLiveData()
+    val checkIn: LiveData<RequestStatus<ResponseBody>> = _checkIn
 
     fun fetchEventDetail(eventId: String) = viewModelScope.launch {
         eventRepository.fetchEventDetail(eventId).collect { value ->
@@ -30,7 +31,7 @@ class EventDetailViewModel : ViewModel() {
 
     fun checkIn(eventId: String) = viewModelScope.launch {
         eventRepository.checkIn(CheckIn(eventId, USER_NAME, EMAIL)).collect { value ->
-            _checkin.value = value
+            _checkIn.value = value
         }
     }
 }

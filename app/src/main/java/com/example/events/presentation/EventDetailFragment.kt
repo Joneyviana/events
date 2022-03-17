@@ -43,7 +43,7 @@ class EventDetailFragment : Fragment() {
             }
         }
 
-        viewModel.checkin.observe(viewLifecycleOwner) {
+        viewModel.checkIn.observe(viewLifecycleOwner) {
             binding?.progressBarLoading?.visibility = it.loading.toVisibility()
         }
     }
