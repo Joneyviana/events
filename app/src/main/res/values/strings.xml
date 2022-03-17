@@ -2,4 +2,6 @@
     <string name="app_name">Events</string>
     <string name="price_event_price">price: %1$s</string>
     <string name="checkin_label">CheckIn</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.events.presentation
+package com.example.events.presentation.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.events.R
+import com.example.events.constants.EventAppConstants
+import com.example.events.constants.EventAppConstants.IS_FROM_EVENT_LIST
 import com.example.events.databinding.EventsFragmentBinding
 import com.example.events.extensions.toVisibility
 
@@ -33,8 +37,12 @@ class EventsFragment : Fragment() {
 
     private fun setScreenState() {
         val linearLayoutManager = LinearLayoutManager(activity)
+        val failurelayout = binding?.failureLayout
+        failurelayout?.reloadButton?.setOnClickListener { viewModel.fetchEvents() }
+
         viewModel.events.observe(viewLifecycleOwner) {
             binding?.progressBarLoading?.visibility = it.loading.toVisibility()
+            failurelayout?.root?.visibility = it.failed.toVisibility()
 
             it.success?.let { event ->
                 val eventsAdapter = EventsAdapter(event)

@@ -18,6 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <include
+                android:id="@+id/failure_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                layout="@layout/failure_layout" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/large_event_image"
                 android:layout_width="match_parent"

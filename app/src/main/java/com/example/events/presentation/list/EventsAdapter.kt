@@ -1,4 +1,4 @@
-package com.example.events.presentation
+package com.example.events.presentation.list
 
 import android.os.Bundle
 import android.view.LayoutInflater

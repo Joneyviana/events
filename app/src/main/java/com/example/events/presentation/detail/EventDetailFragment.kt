@@ -1,4 +1,4 @@
-package com.example.events.presentation
+package com.example.events.presentation.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.events.R
 import com.example.events.constants.EventAppConstants.EVENT_ID
 import com.example.events.databinding.EventDetailFragmentBinding
 import com.example.events.extensions.toVisibility
 
 class EventDetailFragment : Fragment() {
 
+    private var eventId: String? = null
     private var binding: EventDetailFragmentBinding? = null
     private val viewModel by viewModels<EventDetailViewModel>()
 
@@ -26,18 +29,24 @@ class EventDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.getString(EVENT_ID)?.let { eventId ->
+        arguments?.getString(EVENT_ID)?.let {
             setScreenState()
+            eventId = it
             binding?.checkinButton?.setOnClickListener { viewModel.checkIn(eventId) }
-            viewModel.fetchEventDetail(eventId)
+            viewModel.fetchEventDetail(it)
         }
 
     }
 
     private fun setScreenState() {
+        val failurelayout = binding?.failureLayout
+        failurelayout?.reloadButton?.setOnClickListener {
+            eventId?.let { viewModel.fetchEventDetail(it) }
+        }
+
         viewModel.eventDetail.observe(viewLifecycleOwner) {
             binding?.progressBarLoading?.visibility = it.loading.toVisibility()
-
+            failurelayout?.root?.visibility = it.failed.toVisibility()
             it.success?.let { event ->
                 binding?.event = event
             }

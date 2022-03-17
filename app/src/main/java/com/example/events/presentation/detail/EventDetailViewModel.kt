@@ -1,4 +1,4 @@
-package com.example.events.presentation
+package com.example.events.presentation.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,9 +29,12 @@ class EventDetailViewModel : ViewModel() {
         }
     }
 
-    fun checkIn(eventId: String) = viewModelScope.launch {
-        eventRepository.checkIn(CheckIn(eventId, USER_NAME, EMAIL)).collect { value ->
-            _checkIn.value = value
+    fun checkIn(eventId: String?) = viewModelScope.launch {
+        eventId?.let {
+            eventRepository.checkIn(CheckIn(it, USER_NAME, EMAIL)).collect { value ->
+                _checkIn.value = value
+            }
         }
+
     }
 }

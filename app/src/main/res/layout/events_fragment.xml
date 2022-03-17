@@ -5,7 +5,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.EventsFragment">
+    tools:context=".presentation.list.EventsFragment">
+
+    <include
+        android:id="@+id/failure_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/failure_layout" />
 
     <ProgressBar
         android:id="@+id/progress_bar_loading"

@@ -1,4 +1,4 @@
-package com.example.events.presentation
+package com.example.events.presentation.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,7 +19,7 @@ class EventViewModel : ViewModel() {
         fetchEvents()
     }
 
-    private fun fetchEvents() = viewModelScope.launch {
+    fun fetchEvents() = viewModelScope.launch {
         eventRepository.fetchEvents().collect { value ->
             _events.value = value
         }

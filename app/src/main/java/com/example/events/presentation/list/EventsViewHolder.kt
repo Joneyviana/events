@@ -1,4 +1,4 @@
-package com.example.events.presentation
+package com.example.events.presentation.list
 
 import android.view.View
 import androidx.databinding.DataBindingUtil

@@ -6,18 +6,29 @@
     app:startDestination="@id/events">
     <fragment
         android:id="@+id/events"
-        android:name="com.example.events.presentation.EventsFragment"
+        android:name="com.example.events.presentation.list.EventsFragment"
         tools:layout="@layout/events_fragment">
         <action
             android:id="@+id/events_to_detail"
             app:destination="@id/event_detail"
             app:popUpTo="@+id/events"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:restoreState="true" />
+        <action
+            android:id="@+id/events_to_events"
+            app:launchSingleTop="true"
+            app:destination="@id/events" />
+
     </fragment>
+
     <fragment
         android:id="@+id/event_detail"
-        android:name="com.example.events.presentation.EventDetailFragment"
-        tools:layout="@layout/event_detail_fragment" />
-
+        android:name="com.example.events.presentation.detail.EventDetailFragment"
+        tools:layout="@layout/event_detail_fragment">
+        <action
+            android:id="@+id/event_detail_to_event_details"
+            app:launchSingleTop="true"
+            app:destination="@id/event_detail" />
+    </fragment>
 
 </navigation>
