@@ -1,5 +1,7 @@
 ## About The Project
+
 Some libraries used
+
 
 * Data Binding -> Used because it greatly simplifies adding and handling content in the layout.
 * JetPack Navigation -> Used because it facilitates navigation between fragments.
@@ -7,9 +9,11 @@ Some libraries used
 * Dagger Hilt ->  The main benefit for this project was to allow tests running on android to be more easily manipulated.
 
 
-- Architecture used for this project
+Architecture used for this project
+
 
 ## MVVM - Livedata -> I believe it to be satisfactory for many cases.
+
 
 
 
