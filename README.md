@@ -1,4 +1,4 @@
-#About the project
+# About the project
 
 ## Some libraries used
 
