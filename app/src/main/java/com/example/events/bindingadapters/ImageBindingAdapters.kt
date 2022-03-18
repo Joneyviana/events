@@ -4,7 +4,6 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.events.R
-import java.net.URLEncoder
 
 
 @BindingAdapter("imageURL")

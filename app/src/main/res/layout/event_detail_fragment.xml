@@ -9,105 +9,118 @@
             type="com.example.events.data.Event" />
     </data>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+        <ProgressBar
+            android:id="@+id/progress_bar_loading"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-            <include
-                android:id="@+id/failure_layout"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                layout="@layout/failure_layout" />
+                android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/large_event_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/default_margin"
-                android:adjustViewBounds="true"
-                app:imageURL="@{event.image}"
-                app:visibilityDependOnNullable="@{event}"
-                app:layout_constraintTop_toTopOf="parent" />
+                <include
+                    android:id="@+id/failure_layout"
+                    layout="@layout/failure_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-            <TextView
-                android:id="@+id/event_date_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:timestamp="@{event.date}"
-                app:patternDate="@{`yyyy-MM-dd HH:mm`}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/large_event_image"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/large_event_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_margin"
+                    android:adjustViewBounds="true"
+                    app:imageURL="@{event.image}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:visibilityDependOnNullable="@{event}" />
 
-            <TextView
-                android:id="@+id/event_title_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/default_margin"
-                android:text="@{event.title}"
-                android:textSize="@dimen/title_text_size"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/event_date_text" />
+                <TextView
+                    android:id="@+id/event_date_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/large_event_image"
+                    app:patternDate="@{`yyyy-MM-dd HH:mm`}"
+                    app:timestamp="@{event.date}" />
 
-            <TextView
-                android:id="@+id/event_description_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/default_margin"
-                android:text="@{event.description}"
-                android:ellipsize="end"
-                android:maxEms="19"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/event_title_text" />
+                <TextView
+                    android:id="@+id/event_address_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:longitude="@{event.longitude}"
+                    app:latitude="@{event.latitude}"
+                    android:ellipsize="end"
+                    android:maxEms="15"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/event_date_text"/>
 
 
-            <ProgressBar
-                android:id="@+id/progress_bar_loading"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/event_title_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_margin"
+                    android:text="@{event.title}"
+                    android:textSize="@dimen/title_text_size"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/event_address_text" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints" />
+                <TextView
+                    android:id="@+id/event_description_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_margin"
+                    android:ellipsize="end"
+                    android:maxEms="19"
+                    android:text="@{event.description}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/event_title_text" />
 
-            <TextView
-                android:id="@+id/event_price_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{@string/price_event_price(event.price)}"
-                android:layout_margin="@dimen/default_margin"
-                android:textSize="@dimen/title_text_size"
-                android:textStyle="bold"
-                app:visibilityDependOnNullable="@{event}"
-                app:layout_constraintStart_toStartOf="@+id/event_description_text"
-                app:layout_constraintBottom_toBottomOf="@+id/checkin_button" />
+                <TextView
+                    android:id="@+id/event_price_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_margin"
+                    android:text="@{@string/price_event_price(event.price)}"
+                    android:textSize="@dimen/title_text_size"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/checkin_button"
+                    app:layout_constraintStart_toStartOf="@+id/event_description_text"
+                    app:visibilityDependOnNullable="@{event}" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:id="@+id/checkin_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/checkin_label"
-                android:layout_margin="@dimen/default_margin"
-                app:layout_constraintEnd_toEndOf="@+id/event_description_text"
-                app:layout_constraintTop_toBottomOf="@+id/event_description_text"
-                app:visibilityDependOnNullable="@{event}" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/checkin_button"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_margin"
+                    android:text="@string/checkin_label"
+                    app:layout_constraintEnd_toEndOf="@+id/event_description_text"
+                    app:layout_constraintTop_toBottomOf="@+id/event_description_text"
+                    app:visibilityDependOnNullable="@{event}" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
