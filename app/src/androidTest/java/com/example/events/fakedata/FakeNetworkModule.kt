@@ -1,20 +1,22 @@
-package com.example.events.di
+package com.example.events.fakedata
 
-import com.example.events.data.FakeEventApi
 import com.example.events.data.network.EventsApi
+import com.example.events.di.NetworkModule
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
 import dagger.hilt.testing.TestInstallIn
+import javax.inject.Singleton
 
 @TestInstallIn(
-    components = [ViewModelComponent::class],
+    components = [SingletonComponent::class],
     replaces = [NetworkModule::class]
 )
 @Module
-class fakeNetworkModule {
+class FakeNetworkModule {
 
     @Provides
+    @Singleton
     fun provideEventApi(): EventsApi {
         return FakeEventApi()
     }
