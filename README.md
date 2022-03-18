@@ -1,5 +1,5 @@
-<!-- ABOUT THE PROJECT -->
-- Some libraries used
+## About The Project
+Some libraries used
 
 * Data Binding -> Used because it greatly simplifies adding and handling content in the layout.
 * JetPack Navigation -> Used because it facilitates navigation between fragments.
@@ -9,7 +9,7 @@
 
 - Architecture used for this project
 
-MVVM - Livedata -> I believe it to be satisfactory for many cases.
+## MVVM - Livedata -> I believe it to be satisfactory for many cases.
 
 
 
