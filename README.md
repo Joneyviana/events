@@ -1,4 +1,4 @@
-<!-- ABOUT THE PROJECT -->
+## About The Project
 - Some libraries used
 
 * Data Binding -> Used because it greatly simplifies adding and handling content in the layout.
@@ -9,7 +9,7 @@
 
 - Architecture used for this project
 
-MVVM - Livedata -> I believe it to be satisfactory for many cases.
+##MVVM - Livedata -> I believe it to be satisfactory for many cases.
 
 
 
