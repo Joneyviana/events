@@ -2,6 +2,7 @@ package com.example.events.data
 
 import com.example.events.data.network.EventsApi
 import com.example.events.data.network.RequestStatus
+import com.example.events.data.network.RequestStatus.Companion.loading
 import com.example.events.data.network.getNetworkStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +16,7 @@ class EventRepository @Inject constructor(private val eventsApi: EventsApi) {
     fun fetchEvents(): Flow<RequestStatus<List<Event>>> {
         return flow {
 
-            emit(RequestStatus(loading = true))
+            emit(loading())
             emit(getNetworkStatus { eventsApi.getEvents() })
 
         }.flowOn(Dispatchers.IO)
@@ -23,7 +24,7 @@ class EventRepository @Inject constructor(private val eventsApi: EventsApi) {
 
     fun fetchEventDetail(eventId: String): Flow<RequestStatus<Event>> {
         return flow {
-            emit(RequestStatus(loading = true))
+            emit(loading())
             emit(getNetworkStatus { eventsApi.getEventDetail(eventId) })
 
         }.flowOn(Dispatchers.IO)
@@ -31,7 +32,7 @@ class EventRepository @Inject constructor(private val eventsApi: EventsApi) {
 
     fun checkIn(checkIn: CheckIn): Flow<RequestStatus<ResponseBody>> {
         return flow {
-            emit(RequestStatus(loading = true))
+            emit(loading())
             emit(getNetworkStatus { eventsApi.makeCheckIn(checkIn) })
 
         }.flowOn(Dispatchers.IO)

@@ -1,6 +1,7 @@
 package com.example.events.data.network
 
 import android.util.Log
+import com.example.events.data.network.RequestStatus.Companion.failed
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
@@ -14,15 +15,15 @@ suspend fun <T> getNetworkStatus(responseCall: suspend () -> Response<T>): Reque
             }
         }
     } catch (exception: Exception) {
-        RequestStatus(failed = true)
+        failed()
     }
 }
 
 private fun <T> getStatusResponse(response: Response<T>): RequestStatus<T> {
     return if (response.isSuccessful) {
-        RequestStatus(success = response.body())
+        response.body()?.let { RequestStatus(success = it) } ?: failed()
     } else {
-        Log.i("failed message","message: ${response.errorBody()?.string()}")
-        RequestStatus(failed = true)
+        Log.i("failed message", "message: ${response.errorBody()?.string()}")
+        failed()
     }
 }
