@@ -1,7 +1,7 @@
 package com.example.events.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.events.R
 import dagger.hilt.android.AndroidEntryPoint
 

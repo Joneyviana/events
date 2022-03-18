@@ -1,6 +1,5 @@
 package com.example.events.presentation.detail
 
-import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

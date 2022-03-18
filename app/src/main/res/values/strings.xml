@@ -2,6 +2,11 @@
     <string name="app_name">Events</string>
     <string name="price_event_price">price: %1$s</string>
     <string name="checkin_label">CheckIn</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="success_dialog">Success!!</string>
+    <string name="failed_dialog">Failed!!</string>
+    <string name="reload_label">Reload</string>
+    <string name="network_error">Network Error</string>
+    <string name="ok_label">OK</string>
+    <string name="address_not_found">Address not found</string>
+
 </resources>

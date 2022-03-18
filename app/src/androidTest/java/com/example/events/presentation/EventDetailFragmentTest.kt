@@ -12,9 +12,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.events.R
 import com.example.events.data.Event
 import com.example.events.data.EventRepository
+import com.example.events.di.NetworkModule
 import com.example.events.fakedata.FakeDataResponse
 import com.example.events.fakedata.FakeEventApi
-import com.example.events.di.NetworkModule
 import com.example.events.presentation.detail.EventDetailViewModel
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
