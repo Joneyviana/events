@@ -1,5 +1,6 @@
 package com.example.events.presentation
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -10,6 +11,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.events.R
+import com.example.events.constants.EventAppConstants.EVENT_ID
 import com.example.events.data.Event
 import com.example.events.data.EventRepository
 import com.example.events.di.NetworkModule
@@ -20,10 +22,13 @@ import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
+import io.mockk.every
+import io.mockk.mockk
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+
 
 @RunWith(AndroidJUnit4::class)
 @UninstallModules(NetworkModule::class)
@@ -37,8 +42,10 @@ class EventFragmentDetailTest {
     @get:Rule
     val activityScenarioRule = activityScenarioRule<MainActivity>()
 
+    private val savedStateHandle: SavedStateHandle = mockk(relaxed = true)
+
     @BindValue
-    val viewModel: EventDetailViewModel = EventDetailViewModel(EventRepository(FakeEventApi()))
+    val viewModel: EventDetailViewModel = getEventDetailViewModel()
 
     @Before
     fun init() {
@@ -57,7 +64,7 @@ class EventFragmentDetailTest {
 
 
     @Test
-    fun shouldMakeChekIn(){
+    fun shouldMakeChekIn() {
         onView(withId(R.id.checkin_button)).perform(click())
         onView(withText("Success!!")).check(matches(isDisplayed())).perform(pressBack())
 
@@ -81,6 +88,11 @@ class EventFragmentDetailTest {
         viewModel.fetchEventDetail("0")
         failureViewIsGone()
 
+    }
+
+    private fun getEventDetailViewModel(): EventDetailViewModel {
+        every { savedStateHandle.get<String>(EVENT_ID) } returns "0"
+        return EventDetailViewModel(EventRepository(FakeEventApi()), savedStateHandle)
     }
 
 

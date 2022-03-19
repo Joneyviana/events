@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.events.constants.EventAppConstants.EVENT_ID
 import com.example.events.databinding.EventDetailFragmentBinding
 import com.example.events.extensions.toVisibility
 import com.example.events.presentation.checkin.CheckInDialogs
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class EventDetailFragment : Fragment() {
@@ -34,7 +36,6 @@ class EventDetailFragment : Fragment() {
             setScreenState()
             eventId = it
             binding?.checkinButton?.setOnClickListener { viewModel.checkIn(eventId) }
-            viewModel.fetchEventDetail(it)
         }
 
     }
@@ -53,14 +54,16 @@ class EventDetailFragment : Fragment() {
             }
         }
 
-        viewModel.checkIn.observe(viewLifecycleOwner) { response ->
-            binding?.progressBarLoading?.visibility = response.loading.toVisibility()
-            activity?.let { context ->
-                response.success?.let {
-                    CheckInDialogs().showSuccessDialog(context)
-                } ?: run {
-                    if (response.failed) {
-                        CheckInDialogs().showFailedDialog(context)
+        lifecycleScope.launchWhenStarted {
+            viewModel.checkIn.collectLatest { response ->
+                binding?.progressBarLoading?.visibility = response.loading.toVisibility()
+                activity?.let { context ->
+                    response.success?.let {
+                        CheckInDialogs().showSuccessDialog(context)
+                    } ?: run {
+                        if (response.failed) {
+                            CheckInDialogs().showFailedDialog(context)
+                        }
                     }
                 }
             }
