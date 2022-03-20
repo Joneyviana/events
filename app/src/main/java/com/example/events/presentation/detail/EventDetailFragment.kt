@@ -29,7 +29,6 @@ class EventDetailFragment : Fragment() {
         return binding?.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getString(EVENT_ID)?.let {
@@ -74,5 +73,4 @@ class EventDetailFragment : Fragment() {
         super.onDestroyView()
         binding = null
     }
-
 }
