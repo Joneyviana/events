@@ -21,6 +21,8 @@ import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -53,7 +55,7 @@ class EventsFragmentTest {
     @Test
     fun shouldLoadEvents() {
         assertNotNull(events)
-        assertEquals(3, events?.size)
+        assertEquals(4, events?.size)
         events?.forEach {
             onView(withId(R.id.recycler_view_events))
                 .perform(
@@ -70,22 +72,31 @@ class EventsFragmentTest {
             .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
 
         onView(withId(R.id.checkin_button)).check(matches(isDisplayed()))
-
     }
 
     @Test
     fun shouldShowReloadOptionOnFailure() {
         failureViewIsGone()
 
-        FakeDataResponse.setFailure()
+        FakeDataResponse.setFailureAsResponse()
         viewModel.fetchEvents()
         failureViewIsVisible()
 
-        FakeDataResponse.removeFailure()
+        FakeDataResponse.removeFailureAsResponse()
         viewModel.fetchEvents()
         failureViewIsGone()
-
     }
 
+    @Test
+    fun shouldShowEmptyMessage(): Unit = runBlocking {
+        onView(withId(R.id.events_not_found_text))
+            .check(matches(withEffectiveVisibility(Visibility.GONE)))
 
+        FakeDataResponse.setEmptyAsResponse()
+        viewModel.fetchEvents()
+        delay(100)
+        onView(withId(R.id.events_not_found_text)).check(matches(isDisplayed()))
+
+        FakeDataResponse.removeEmptyAsResponse()
+    }
 }

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.pressBack
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -24,6 +25,7 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import io.mockk.every
 import io.mockk.mockk
+import org.hamcrest.CoreMatchers.containsString
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -59,7 +61,11 @@ class EventFragmentDetailTest {
     fun shouldLoadEventDetail() {
         onView(withId(R.id.checkin_button)).check(matches(isDisplayed()))
         onView(withText("title 1")).check(matches(isDisplayed()))
-        onView(withText("description 1")).check(matches(isDisplayed()))
+        onView(withText("price: 2.74")).check(matches(isDisplayed()))
+
+        //Porto Alegre is at the address based on the given latitude and longitude
+        onView(withText(containsString("Porto Alegre"))).check(matches(isDisplayed()))
+        onView(withText("description 1")).check(doesNotExist())
     }
 
 
@@ -68,32 +74,28 @@ class EventFragmentDetailTest {
         onView(withId(R.id.checkin_button)).perform(click())
         onView(withText("Success!!")).check(matches(isDisplayed())).perform(pressBack())
 
-        FakeDataResponse.setFailure()
+        FakeDataResponse.setFailureAsResponse()
         onView(withId(R.id.checkin_button)).perform(click())
         onView(withText("Failed!!")).check(matches(isDisplayed())).perform(pressBack())
 
-        FakeDataResponse.removeFailure()
-
+        FakeDataResponse.removeFailureAsResponse()
     }
 
     @Test
     fun shouldShowReloadOptionOnFailure() {
         failureViewIsGone()
 
-        FakeDataResponse.setFailure()
+        FakeDataResponse.setFailureAsResponse()
         viewModel.fetchEventDetail("0")
         failureViewIsVisible()
 
-        FakeDataResponse.removeFailure()
+        FakeDataResponse.removeFailureAsResponse()
         viewModel.fetchEventDetail("0")
         failureViewIsGone()
-
     }
 
     private fun getEventDetailViewModel(): EventDetailViewModel {
         every { savedStateHandle.get<String>(EVENT_ID) } returns "0"
         return EventDetailViewModel(EventRepository(FakeEventApi()), savedStateHandle)
     }
-
-
 }

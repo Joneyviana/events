@@ -9,5 +9,6 @@
     <string name="network_error">Network Error</string>
     <string name="ok_label">OK</string>
     <string name="address_not_found">Address not found</string>
+    <string name="events_not_found">Events not found</string>
 
 </resources>

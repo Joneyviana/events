@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.events.data.Event
 import com.example.events.databinding.EventsFragmentBinding
 import com.example.events.extensions.toVisibility
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +35,6 @@ class EventsFragment : Fragment() {
     }
 
     private fun setScreenState() {
-        val linearLayoutManager = LinearLayoutManager(activity)
         val failurelayout = binding?.failureLayout
         failurelayout?.reloadButton?.setOnClickListener { viewModel.fetchEvents() }
 
@@ -42,12 +42,12 @@ class EventsFragment : Fragment() {
             binding?.progressBarLoading?.visibility = it.loading.toVisibility()
             failurelayout?.root?.visibility = it.failed.toVisibility()
 
-            it.success?.let { event ->
-                val eventsAdapter = EventsAdapter(event)
-                binding?.recyclerViewEvents?.apply {
-                    adapter = eventsAdapter
-                    layoutManager = linearLayoutManager
-                    addItemDecoration(DividerItemDecoration(context, linearLayoutManager.orientation))
+            it.success?.let { events ->
+                if(events.isNotEmpty()) {
+                    setAdapter(events)
+                }
+                else {
+                    binding?.eventsNotFoundText?.visibility = View.VISIBLE
                 }
             }
         }
@@ -56,6 +56,16 @@ class EventsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    private fun setAdapter(events: List<Event>) {
+        val linearLayoutManager = LinearLayoutManager(activity)
+        val eventsAdapter = EventsAdapter(events)
+        binding?.recyclerViewEvents?.apply {
+            adapter = eventsAdapter
+            layoutManager = linearLayoutManager
+            addItemDecoration(DividerItemDecoration(context, linearLayoutManager.orientation))
+        }
     }
 
 }

@@ -13,6 +13,20 @@
         android:layout_height="match_parent"
         layout="@layout/failure_layout" />
 
+    <TextView
+        android:id="@+id/events_not_found_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:text="@string/events_not_found"
+        android:textSize="@dimen/title_text_size"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ProgressBar
         android:id="@+id/progress_bar_loading"
         style="?android:attr/progressBarStyleLarge"
