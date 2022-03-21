@@ -3,6 +3,7 @@
     <string name="event_detail_label">Event Details</string>
     <string name="price_event_price">price: %1$s</string>
     <string name="checkin_label">CheckIn</string>
+    <string name="share_label">Share</string>
     <string name="success_dialog">Success!!</string>
     <string name="failed_dialog">Failed!!</string>
     <string name="reload_label">Reload</string>
@@ -10,5 +11,6 @@
     <string name="ok_label">OK</string>
     <string name="address_not_found">Address not found</string>
     <string name="events_not_found">Events not found</string>
+    <string name="check_event">Check the event</string>
 
 </resources>

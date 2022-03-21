@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.events.R
 import com.example.events.constants.EventAppConstants.EVENT_ID
 import com.example.events.databinding.EventDetailFragmentBinding
 import com.example.events.extensions.toVisibility
@@ -36,7 +38,11 @@ class EventDetailFragment : Fragment() {
             eventId = it
             binding?.checkinButton?.setOnClickListener { viewModel.checkIn(eventId) }
         }
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
     private fun setScreenState() {
@@ -50,27 +56,31 @@ class EventDetailFragment : Fragment() {
             failurelayout?.root?.visibility = it.failed.toVisibility()
             it.success?.let { event ->
                 binding?.event = event
+                binding?.shareButton?.setOnClickListener {
+                    activity?.let { context ->
+                        ShareCompat.IntentBuilder(context)
+                            .setType("text/plain")
+                            .setChooserTitle(getString(R.string.check_event))
+                            .setText(event.getSharedtext())
+                            .startChooser()
+                    };
+                }
             }
-        }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.checkIn.collectLatest { response ->
-                binding?.progressBarLoading?.visibility = response.loading.toVisibility()
-                activity?.let { context ->
-                    response.success?.let {
-                        CheckInDialogs().showSuccessDialog(context)
-                    } ?: run {
-                        if (response.failed) {
-                            CheckInDialogs().showFailedDialog(context)
+            lifecycleScope.launchWhenStarted {
+                viewModel.checkIn.collectLatest { response ->
+                    binding?.progressBarLoading?.visibility = response.loading.toVisibility()
+                    activity?.let { context ->
+                        response.success?.let {
+                            CheckInDialogs().showSuccessDialog(context)
+                        } ?: run {
+                            if (response.failed) {
+                                CheckInDialogs().showFailedDialog(context)
+                            }
                         }
                     }
                 }
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
     }
 }

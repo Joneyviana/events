@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -64,13 +65,13 @@
                     android:id="@+id/event_address_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:longitude="@{event.longitude}"
-                    app:latitude="@{event.latitude}"
                     android:ellipsize="end"
                     android:maxEms="15"
+                    app:latitude="@{event.latitude}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/event_date_text"/>
+                    app:layout_constraintTop_toBottomOf="@id/event_date_text"
+                    app:longitude="@{event.longitude}" />
 
 
                 <TextView
@@ -105,20 +106,56 @@
                     android:text="@{@string/price_event_price(event.price)}"
                     android:textSize="@dimen/title_text_size"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/checkin_button"
-                    app:layout_constraintStart_toStartOf="@+id/event_description_text"
+                    app:layout_constraintTop_toBottomOf="@id/event_description_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:visibilityDependOnNullable="@{event}" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/checkin_button"
                     style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/default_margin"
                     android:text="@string/checkin_label"
-                    app:layout_constraintEnd_toEndOf="@+id/event_description_text"
-                    app:layout_constraintTop_toBottomOf="@+id/event_description_text"
+                    app:layout_constraintEnd_toEndOf="@id/guideline75p"
+                    app:layout_constraintStart_toStartOf="@id/guideline25p"
+                    app:layout_constraintTop_toBottomOf="@+id/event_price_text"
                     app:visibilityDependOnNullable="@{event}" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/share_button"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/share_label"
+                    app:layout_constraintEnd_toEndOf="@id/guideline75p"
+                    app:layout_constraintStart_toStartOf="@id/guideline25p"
+                    app:layout_constraintTop_toBottomOf="@id/checkin_button"
+                    app:visibilityDependOnNullable="@{event}" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space"
+                    app:layout_constraintBottom_toBottomOf="@id/share_button"
+                    app:layout_constraintTop_toTopOf="@id/share_button" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline25p"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintGuide_percent=".25" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline75p"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintGuide_percent=".75" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
