@@ -11,7 +11,7 @@ class NetworkStatusTest {
     @Test
     fun shouldReturnRequestSuccess(): Unit = runBlocking {
         val result = getNetworkStatus { Response.success(true) }
-        assertTrue(result.success == true)
+        assertTrue(result.data == true)
         assertFalse(result.failed)
     }
 
@@ -21,14 +21,14 @@ class NetworkStatusTest {
             Response.error<String>(400, ResponseBody.create(null, "failed"))
         }
 
-        assertNull(result.success)
+        assertNull(result.data)
         assertTrue(result.failed)
     }
 
     @Test
     fun shouldReturnRequestFailedOnException(): Unit = runBlocking {
         val result = getNetworkStatus<String> { throw Exception("failed") }
-        assertNull(result.success)
+        assertNull(result.data)
         assertTrue(result.failed)
 
     }

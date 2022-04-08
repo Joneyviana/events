@@ -1,7 +1,7 @@
 package com.example.events.fakedata
 
 import com.example.events.data.CheckIn
-import com.example.events.data.Event
+import com.example.events.data.local.Event
 import com.example.events.data.network.EventsApi
 import okhttp3.ResponseBody
 import retrofit2.Response

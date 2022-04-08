@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.events.data.Event
+import com.example.events.data.local.Event
 import com.example.events.databinding.EventsFragmentBinding
 import com.example.events.extensions.toVisibility
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,18 +36,16 @@ class EventsFragment : Fragment() {
 
     private fun setScreenState() {
         val failurelayout = binding?.failureLayout
-        failurelayout?.reloadButton?.setOnClickListener { viewModel.fetchEvents() }
+        failurelayout?.reloadButton?.setOnClickListener { viewModel.loadEvents() }
 
         viewModel.events.observe(viewLifecycleOwner) {
             binding?.progressBarLoading?.visibility = it.loading.toVisibility()
-            failurelayout?.root?.visibility = it.failed.toVisibility()
+            failurelayout?.root?.visibility = it.loadFailure.toVisibility()
+            binding?.eventsNotFoundText?.visibility = (it.noContentServer).toVisibility()
 
-            it.success?.let { events ->
-                if(events.isNotEmpty()) {
+            it.data?.let { events ->
+                if(!it.noContent) {
                     setAdapter(events)
-                }
-                else {
-                    binding?.eventsNotFoundText?.visibility = View.VISIBLE
                 }
             }
         }

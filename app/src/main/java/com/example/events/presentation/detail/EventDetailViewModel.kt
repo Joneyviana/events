@@ -5,8 +5,9 @@ import com.example.events.constants.EventAppConstants.EMAIL
 import com.example.events.constants.EventAppConstants.EVENT_ID
 import com.example.events.constants.EventAppConstants.USER_NAME
 import com.example.events.data.CheckIn
-import com.example.events.data.Event
 import com.example.events.data.EventRepository
+import com.example.events.data.Resource
+import com.example.events.data.local.Event
 import com.example.events.data.network.RequestStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -22,22 +23,20 @@ class EventDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
+    private val _checkIn = MutableSharedFlow<RequestStatus<ResponseBody>>()
+    val checkIn = _checkIn.asSharedFlow()
+
+    private val _eventId = MutableLiveData<String>()
+    val eventDetail = _eventId.switchMap { id -> eventRepository.fetchEventDetail(id) }
+
     init {
         savedStateHandle.get<String>(EVENT_ID)?.let {
             fetchEventDetail(it)
         }
     }
 
-    private val _eventDetail: MutableLiveData<RequestStatus<Event>> = MutableLiveData()
-    val eventDetail: LiveData<RequestStatus<Event>> = _eventDetail
-
-    private val _checkIn = MutableSharedFlow<RequestStatus<ResponseBody>>()
-    val checkIn = _checkIn.asSharedFlow()
-
-    fun fetchEventDetail(eventId: String) = viewModelScope.launch {
-        eventRepository.fetchEventDetail(eventId).collect { value ->
-            _eventDetail.value = value
-        }
+    fun fetchEventDetail(eventId: String) {
+        _eventId.value = eventId
     }
 
     fun checkIn(eventId: String?) = viewModelScope.launch {
@@ -46,6 +45,5 @@ class EventDetailViewModel @Inject constructor(
                 _checkIn.emit(value)
             }
         }
-
     }
 }

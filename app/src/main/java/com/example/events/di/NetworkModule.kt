@@ -15,7 +15,6 @@ class NetworkModule {
         private const val BASE_API = "https://5f5a8f24d44d640016169133.mockapi.io/"
     }
 
-
     @Provides
     fun provideEventApi(): EventsApi {
         return Retrofit.Builder()

@@ -53,15 +53,15 @@ class EventDetailFragment : Fragment() {
 
         viewModel.eventDetail.observe(viewLifecycleOwner) {
             binding?.progressBarLoading?.visibility = it.loading.toVisibility()
-            failurelayout?.root?.visibility = it.failed.toVisibility()
-            it.success?.let { event ->
+            failurelayout?.root?.visibility = it.loadFailure.toVisibility()
+            it.data?.let { event ->
                 binding?.event = event
                 binding?.shareButton?.setOnClickListener {
                     activity?.let { context ->
                         ShareCompat.IntentBuilder(context)
                             .setType("text/plain")
                             .setChooserTitle(getString(R.string.check_event))
-                            .setText(event.getSharedtext())
+                            .setText(event.getSharedText())
                             .startChooser()
                     };
                 }
@@ -71,7 +71,7 @@ class EventDetailFragment : Fragment() {
                 viewModel.checkIn.collectLatest { response ->
                     binding?.progressBarLoading?.visibility = response.loading.toVisibility()
                     activity?.let { context ->
-                        response.success?.let {
+                        response.data?.let {
                             CheckInDialogs().showSuccessDialog(context)
                         } ?: run {
                             if (response.failed) {

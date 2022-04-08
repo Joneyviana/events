@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.events.R
 import com.example.events.constants.EventAppConstants.EVENT_ID
-import com.example.events.data.Event
+import com.example.events.data.local.Event
 
 
 /**

@@ -13,7 +13,7 @@ import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.events.R
 import com.example.events.constants.EventAppConstants.EVENT_ID
-import com.example.events.data.Event
+import com.example.events.data.local.Event
 import com.example.events.data.EventRepository
 import com.example.events.di.NetworkModule
 import com.example.events.fakedata.FakeDataResponse
