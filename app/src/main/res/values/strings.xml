@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Events</string>
     <string name="event_detail_label">Event Details</string>
-    <string name="price_event_price">price: %1$s</string>
+    <string name="price_event_price">Price: R$ %1$s</string>
     <string name="checkin_label">CheckIn</string>
     <string name="share_label">Share</string>
     <string name="success_dialog">Success!!</string>

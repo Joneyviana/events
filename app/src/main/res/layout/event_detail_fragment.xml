@@ -103,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/default_margin"
-                    android:text="@{@string/price_event_price(event.price)}"
+                    android:text="@{@string/price_event_price(event.getFormattedPrice())}"
                     android:textSize="@dimen/title_text_size"
                     android:textStyle="bold"
                     app:layout_constraintTop_toBottomOf="@id/event_description_text"

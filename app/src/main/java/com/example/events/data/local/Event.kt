@@ -24,4 +24,12 @@ data class Event(
     fun getSharedText(): String {
         return "$title \n\n $description \n\n  $image"
     }
+
+    fun getFormattedPrice(): String {
+        var formattedPrice = this.price
+        if (!formattedPrice.contains(".")) {
+            formattedPrice += ".00"
+        }
+        return formattedPrice
+    }
 }
