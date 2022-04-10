@@ -31,24 +31,26 @@ class EventsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setScreenState()
-
     }
+
 
     private fun setScreenState() {
         val failurelayout = binding?.failureLayout
-        failurelayout?.reloadButton?.setOnClickListener { viewModel.loadEvents() }
-
+        failurelayout?.reloadButton?.setOnClickListener {
+            viewModel.loadEvents()
+        }
         viewModel.events.observe(viewLifecycleOwner) {
             binding?.progressBarLoading?.visibility = it.loading.toVisibility()
             failurelayout?.root?.visibility = it.loadFailure.toVisibility()
             binding?.eventsNotFoundText?.visibility = (it.noContentServer).toVisibility()
 
             it.data?.let { events ->
-                if(!it.noContent) {
+                if (!it.noContent) {
                     setAdapter(events)
                 }
             }
         }
+
     }
 
     override fun onDestroyView() {

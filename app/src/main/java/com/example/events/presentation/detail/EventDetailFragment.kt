@@ -66,17 +66,17 @@ class EventDetailFragment : Fragment() {
                     };
                 }
             }
+        }
 
-            lifecycleScope.launchWhenStarted {
-                viewModel.checkIn.collectLatest { response ->
-                    binding?.progressBarLoading?.visibility = response.loading.toVisibility()
-                    activity?.let { context ->
-                        response.data?.let {
-                            CheckInDialogs().showSuccessDialog(context)
-                        } ?: run {
-                            if (response.failed) {
-                                CheckInDialogs().showFailedDialog(context)
-                            }
+        lifecycleScope.launchWhenStarted {
+            viewModel.checkIn.collectLatest { response ->
+                binding?.progressBarLoading?.visibility = response.loading.toVisibility()
+                activity?.let { context ->
+                    response.data?.let {
+                        CheckInDialogs().showSuccessDialog(context)
+                    } ?: run {
+                        if (response.failed) {
+                            CheckInDialogs().showFailedDialog(context)
                         }
                     }
                 }

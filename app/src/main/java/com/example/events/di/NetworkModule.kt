@@ -7,6 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -15,6 +16,7 @@ class NetworkModule {
         private const val BASE_API = "https://5f5a8f24d44d640016169133.mockapi.io/"
     }
 
+    @Singleton
     @Provides
     fun provideEventApi(): EventsApi {
         return Retrofit.Builder()

@@ -15,9 +15,12 @@ interface EventDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(events: List<Event>)
 
-    @Query("SELECT * from event")
+    @Query("SELECT * FROM event ORDER BY id ASC")
     fun getAllEvents(): LiveData<List<Event>>
 
-    @Query("SELECT * from event where id = :id")
+    @Query("SELECT * FROM event where id = :id")
     fun getEventById(id: String): LiveData<Event>
+
+    @Query("DELETE FROM event")
+    fun deleteAll()
 }

@@ -6,8 +6,6 @@ import com.example.events.constants.EventAppConstants.EVENT_ID
 import com.example.events.constants.EventAppConstants.USER_NAME
 import com.example.events.data.CheckIn
 import com.example.events.data.EventRepository
-import com.example.events.data.Resource
-import com.example.events.data.local.Event
 import com.example.events.data.network.RequestStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow

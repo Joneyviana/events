@@ -21,7 +21,7 @@ suspend fun <T> getNetworkStatus(responseCall: suspend () -> Response<T>): Reque
 
 private fun <T> getStatusResponse(response: Response<T>): RequestStatus<T> {
     return if (response.isSuccessful) {
-        response.body()?.let { RequestStatus(success = it) } ?: failed()
+        response.body()?.let { RequestStatus(data = it) } ?: failed()
     } else {
         Log.i("failed message", "message: ${response.errorBody()?.string()}")
         failed()

@@ -6,8 +6,8 @@ class RequestStatus<T> private constructor(
     var data: T? = null
 ) {
 
-    constructor(success: T) : this() {
-        this.data = success
+    constructor(data: T) : this() {
+        this.data = data
     }
 
     companion object {
