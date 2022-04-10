@@ -70,7 +70,7 @@ class EventFragmentDetailTest {
         goToDetailScreen()
         onView(withId(R.id.checkin_button)).check(matches(isDisplayed()))
         onView(withText("title 1")).check(matches(isDisplayed()))
-        onView(withText("price: 2.74")).check(matches(isDisplayed()))
+        onView(withText("Price: R$ 2.74")).check(matches(isDisplayed()))
 
         //Porto Alegre is at the address based on the given latitude and longitude
         onView(withText(containsString("Porto Alegre"))).check(matches(isDisplayed()))

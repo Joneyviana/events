@@ -17,7 +17,8 @@ class Resource<T> private constructor(
         }
 
         fun <T> loaded(data: T, networkFailure: Boolean, isNetworkAlreadyResponse: Boolean): Resource<T> {
-            val hasContent = data != null && (data as? List<*>)?.isNotEmpty() == true
+            val isEmptyList = (data as? List<*>)?.isEmpty() == true
+            val hasContent = data != null && !isEmptyList
             return Resource(
                 data = data,
                 loading = !isNetworkAlreadyResponse && !hasContent,
