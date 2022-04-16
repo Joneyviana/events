@@ -11,15 +11,10 @@
         <action
             android:id="@+id/events_to_detail"
             app:destination="@id/event_detail"
-            app:popUpTo="@+id/events"
-            app:popUpToInclusive="true"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:restoreState="true" />
-        <action
-            android:id="@+id/events_to_events"
-            app:launchSingleTop="true"
-            app:destination="@id/events" />
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/slide_right"
+            app:popEnterAnim="@anim/slide_left"
+            app:popExitAnim="@anim/slide_right" />
 
     </fragment>
 
@@ -27,10 +22,6 @@
         android:id="@+id/event_detail"
         android:name="com.example.events.presentation.detail.EventDetailFragment"
         tools:layout="@layout/event_detail_fragment">
-        <action
-            android:id="@+id/event_detail_to_event_details"
-            app:launchSingleTop="true"
-            app:destination="@id/event_detail" />
     </fragment>
 
 </navigation>

@@ -26,7 +26,7 @@ class EventsAdapter(
         binding?.event = events[position]
         binding?.executePendingBindings()
         val bundle = Bundle().apply { putString(EVENT_ID, events[position].id) }
-        holder.itemView.setOnClickListener { it.findNavController().navigate(R.id.event_detail, bundle) }
+        holder.itemView.setOnClickListener { it.findNavController().navigate(R.id.events_to_detail, bundle) }
     }
 
     override fun getItemCount() = events.size
