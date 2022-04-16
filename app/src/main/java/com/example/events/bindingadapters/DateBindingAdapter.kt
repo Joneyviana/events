@@ -5,7 +5,6 @@ import androidx.databinding.BindingAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 @BindingAdapter(value = ["timestamp", "patternDate"], requireAll = false)
 fun TextView.applyDate(timestamp: Long?, patternDate: String?) {
     timestamp?.let {

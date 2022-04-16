@@ -24,7 +24,8 @@ class EventDetailFragment : Fragment() {
     private val viewModel by viewModels<EventDetailViewModel>()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = EventDetailFragmentBinding.inflate(inflater, container, false)
@@ -63,7 +64,7 @@ class EventDetailFragment : Fragment() {
                             .setChooserTitle(getString(R.string.check_event))
                             .setText(event.getSharedText())
                             .startChooser()
-                    };
+                    }
                 }
             }
         }

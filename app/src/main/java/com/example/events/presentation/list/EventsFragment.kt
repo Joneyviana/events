@@ -13,7 +13,6 @@ import com.example.events.databinding.EventsFragmentBinding
 import com.example.events.extensions.toVisibility
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class EventsFragment : Fragment() {
 
@@ -21,7 +20,8 @@ class EventsFragment : Fragment() {
     private val viewModel by viewModels<EventViewModel>()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = EventsFragmentBinding.inflate(inflater, container, false)
@@ -32,7 +32,6 @@ class EventsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setScreenState()
     }
-
 
     private fun setScreenState() {
         val failurelayout = binding?.failureLayout
@@ -50,7 +49,6 @@ class EventsFragment : Fragment() {
                 }
             }
         }
-
     }
 
     override fun onDestroyView() {
@@ -67,5 +65,4 @@ class EventsFragment : Fragment() {
             addItemDecoration(DividerItemDecoration(context, linearLayoutManager.orientation))
         }
     }
-
 }

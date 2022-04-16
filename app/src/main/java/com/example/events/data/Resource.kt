@@ -26,8 +26,6 @@ class Resource<T> private constructor(
                 noContent = !hasContent,
                 isNetworkAlreadyResponse = isNetworkAlreadyResponse
             )
-
         }
-
     }
 }

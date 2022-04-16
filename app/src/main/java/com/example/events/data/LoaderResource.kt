@@ -1,6 +1,5 @@
 package com.example.events.data
 
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
@@ -23,7 +22,6 @@ fun <T, A> loadResource(
         if (!responseStatus.failed) {
             isNetworkAlreadyResponse = true
             saveCallResult(responseStatus.data!!)
-
         } else {
             networkFailure = true
             isNetworkAlreadyResponse = true

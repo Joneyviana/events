@@ -41,7 +41,6 @@ class ListFailureCaseTest {
             viewModel = EventViewModel(EventRepository(FakeEventApi(), appDatabase.eventDao()))
         }
         hiltRule.inject()
-
     }
 
     @After

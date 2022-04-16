@@ -10,5 +10,4 @@ fun View.setVisibility(element: Any?) {
     } else {
         View.VISIBLE
     }
-
 }

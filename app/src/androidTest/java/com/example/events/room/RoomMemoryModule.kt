@@ -29,5 +29,4 @@ object RoomMemoryModule {
     @Singleton
     @Provides
     fun provideCharacterDao(db: AppDatabase) = db.eventDao()
-
 }

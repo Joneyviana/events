@@ -17,7 +17,6 @@ class ResourceTest {
         assertEquals(true, resourceOne.noContent)
         assertEquals(false, resourceOne.contentOffline)
         assertEquals(false, resourceOne.loadFailure)
-
     }
 
     @Test
@@ -29,8 +28,6 @@ class ResourceTest {
         assertEquals(false, resource.noContent)
         assertEquals(false, resource.noContentServer)
     }
-
-
     @Test
     fun `Should return correct attrs when network failed and no offline data`() {
         val resourceOne = Resource.loaded(null, networkFailure = true, isNetworkAlreadyResponse = true)

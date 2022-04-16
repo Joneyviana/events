@@ -11,5 +11,4 @@ import com.example.events.databinding.EventViewItemBinding
 class EventsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     val binding: EventViewItemBinding? = DataBindingUtil.bind(view)
-
 }

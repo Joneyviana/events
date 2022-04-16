@@ -32,18 +32,16 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
 @UninstallModules(NetworkModule::class)
 @HiltAndroidTest
-class EventFragmentDetailTest {
+class EventDetailFragmentTest {
 
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
 
     @get:Rule
     val activityScenarioRule = activityScenarioRule<MainActivity>()
-
 
     private val savedStateHandle: SavedStateHandle = mockk(relaxed = true)
 
@@ -72,7 +70,7 @@ class EventFragmentDetailTest {
         onView(withText("title 1")).check(matches(isDisplayed()))
         onView(withText("Price: R$ 2.74")).check(matches(isDisplayed()))
 
-        //Porto Alegre is at the address based on the given latitude and longitude
+        // Porto Alegre is at the address based on the given latitude and longitude
         onView(withText(containsString("Porto Alegre"))).check(matches(isDisplayed()))
         onView(withText("description 1")).check(doesNotExist())
     }

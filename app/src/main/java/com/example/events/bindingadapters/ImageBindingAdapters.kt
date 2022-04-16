@@ -6,7 +6,6 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.events.R
 
-
 @BindingAdapter("imageURL")
 fun AppCompatImageView.loadImage(url: String?) {
     if (URLUtil.isValidUrl(url)) {

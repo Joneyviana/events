@@ -11,7 +11,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun eventDao(): EventDao
 
     companion object {
-        @Volatile private var instance: AppDatabase? = null
+        @Volatile
+        private var instance: AppDatabase? = null
 
         fun getDatabase(context: Context): AppDatabase =
             instance ?: synchronized(this) { instance ?: buildDatabase(context).also { instance = it } }
@@ -21,5 +22,4 @@ abstract class AppDatabase : RoomDatabase() {
                 .fallbackToDestructiveMigration()
                 .build()
     }
-
 }

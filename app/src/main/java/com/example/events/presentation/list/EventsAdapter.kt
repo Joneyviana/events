@@ -9,10 +9,6 @@ import com.example.events.R
 import com.example.events.constants.EventAppConstants.EVENT_ID
 import com.example.events.data.local.Event
 
-
-/**
- * @author WellingtonCosta on 18/07/18
- */
 class EventsAdapter(
     var events: List<Event>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

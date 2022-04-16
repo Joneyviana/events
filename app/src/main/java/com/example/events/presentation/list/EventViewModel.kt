@@ -19,6 +19,4 @@ class EventViewModel @Inject constructor(private val eventRepository: EventRepos
     fun loadEvents() {
         shouldReload.value = true
     }
-
-
 }

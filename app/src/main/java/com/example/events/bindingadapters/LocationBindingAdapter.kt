@@ -6,7 +6,6 @@ import androidx.databinding.BindingAdapter
 import com.example.events.R
 import java.util.*
 
-
 @BindingAdapter(value = ["latitude", "longitude"], requireAll = false)
 fun TextView.setAddress(latitude: Double?, longitude: Double?) {
     if (latitude != null && longitude != null) {

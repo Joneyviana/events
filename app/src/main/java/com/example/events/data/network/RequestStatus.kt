@@ -18,6 +18,5 @@ class RequestStatus<T> private constructor(
         fun <T> failed(): RequestStatus<T> {
             return RequestStatus(failed = true)
         }
-
     }
 }

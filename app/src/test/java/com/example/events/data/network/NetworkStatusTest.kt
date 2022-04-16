@@ -30,6 +30,5 @@ class NetworkStatusTest {
         val result = getNetworkStatus<String> { throw Exception("failed") }
         assertNull(result.data)
         assertTrue(result.failed)
-
     }
 }

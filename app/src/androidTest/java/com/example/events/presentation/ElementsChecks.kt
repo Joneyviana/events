@@ -41,8 +41,11 @@ fun listEventsIsLoaded(): Unit = runBlocking {
     FakeDataResponse.getEvents().body()?.forEach {
         onView(ViewMatchers.withId(R.id.recycler_view_events))
             .perform(
-                RecyclerViewActions.actionOnItem<RecyclerView.ViewHolder>
-                    (ViewMatchers.hasDescendant(ViewMatchers.withText(it.title)), ViewActions.scrollTo())
-            );
+                RecyclerViewActions
+                    .actionOnItem<RecyclerView.ViewHolder>(
+                        ViewMatchers.hasDescendant(ViewMatchers.withText(it.title)),
+                        ViewActions.scrollTo()
+                    )
+            )
     }
 }
